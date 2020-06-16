@@ -1,10 +1,7 @@
 package com.ahmad.springboot.todos;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,15 +17,29 @@ public class TodoController {
     // Will return the below as JSON formatted
     @GetMapping(value = {"", "/"})
     public List<Todo> getAllTodos() {
-
         return todoService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Todo getTodoById(@PathVariable int id){
-
+    public Todo getTodoById(@PathVariable int id) {
         return todoService.getById(id);
-
     }
 
+    @PostMapping(value = {"", "/"})
+    public Todo createNewTodo(@RequestBody Todo todo) {
+        if (todoService.save(todo))
+            return todo;
+
+        return null;
+    }
+
+    @PutMapping(value = {"", "/"})
+    public Todo editTodo(@RequestBody Todo todo) {
+         return todoService.edit(todo);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTodo(@PathVariable int id) {
+        todoService.delete(id);
+    }
 }

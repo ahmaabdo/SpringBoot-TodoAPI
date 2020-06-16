@@ -10,6 +10,9 @@ public class Todo {
         this.description = description;
     }
 
+    public Todo() {
+    }
+
     private String description;
 
     public int getId() {
