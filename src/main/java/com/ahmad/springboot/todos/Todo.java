@@ -1,25 +1,33 @@
 package com.ahmad.springboot.todos;
 
-public class Todo {
-    private int id;
-    private String title;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-    public Todo(int id, String title, String description) {
+@Document
+public class Todo {
+
+    @Id
+    private String id;
+    private String title;
+    private String description;
+    private long timestamp;
+
+    public Todo(String id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public Todo() {
+        this.timestamp = System.currentTimeMillis();
     }
 
-    private String description;
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,5 +45,13 @@ public class Todo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

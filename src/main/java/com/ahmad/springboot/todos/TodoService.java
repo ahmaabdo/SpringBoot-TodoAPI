@@ -1,6 +1,7 @@
 package com.ahmad.springboot.todos;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,46 +11,30 @@ import java.util.List;
 @Service
 public class TodoService {
 
-    private List<Todo> data = new ArrayList<>(Arrays.asList(
-            new Todo(1, "First todo", "this is my first task"),
-            new Todo(2, "Second todo", "this is my second task"),
-            new Todo(3, "Third todo", "this is my third task"),
-            new Todo(4, "Forth todo", "this is my forth task"),
-            new Todo(5, "Fifth todo", "this is my fifth task"),
-            new Todo(6, "Sixth todo", "this is my sixth task")
-    )
-    );
+    @Autowired
+    private TodoRepository todoRepository;
 
+    /**
+     * Get all todos
+     * @return List<Todo>
+     */
     public List<Todo> findAll() {
-        return data;
+        return todoRepository.findAll();
     }
 
-    public Todo getById(int id) {
-        for (Todo todo : data)
-            if (todo.getId() == id)
-                return todo;
-
-        return null;
+    public Todo getById(String id) {
+        return todoRepository.findById(id).get();
     }
 
-    public boolean save(Todo todo) {
-        return data.add(todo);
+    public Todo save(Todo todo) {
+        return todoRepository.insert(todo);
     }
 
-    public void delete(int id) {
-//        for (Todo todo : data)
-//            if (todo.getId() == id)
-//                data.remove(todo);
-
-        data.removeIf(todo -> todo.getId() == id);
+    public void delete(String id) {
+        todoRepository.deleteById(id);
     }
 
     public Todo edit(Todo todo) {
-        for (int i = 0; i < data.size(); i++)
-            if (data.get(i).getId() == todo.getId()) {
-                data.set(i, todo);
-                return data.get(i);
-            }
-        return null;
+        return todoRepository.save(todo);
     }
 }
