@@ -26,8 +26,10 @@ public class TodoController {
     }
 
     @PostMapping(value = {"", "/"})
-    public Todo createNewTodo(@RequestBody Todo todo) {
-            return todoService.save(todo);
+    public ResponseEntity<Todo> createNewTodo(@Valid @RequestBody Todo todo) {
+
+        Todo result = todoService.save(todo);
+        return new ResponseEntity<Todo>(result, HttpStatus.CREATED);
     }
 
     @PutMapping(value = {"", "/"})

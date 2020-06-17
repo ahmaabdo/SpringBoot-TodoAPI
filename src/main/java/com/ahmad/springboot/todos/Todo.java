@@ -3,13 +3,22 @@ package com.ahmad.springboot.todos;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Document
 public class Todo {
 
     @Id
     private String id;
+
+    @NotNull(message = "Title is required")
+    @Size(min =3, message = "Title must be at least 3 characters long")
     private String title;
+
+    @NotNull(message = "Description is required")
     private String description;
+
     private long timestamp;
 
     public Todo(String id, String title, String description) {
