@@ -1,0 +1,6 @@
+/target/classes/META-INF/springboot.todoapi.kotlin_module
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
