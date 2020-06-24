@@ -1,9 +1,8 @@
 package com.ahmad.springboot.security;
 
+import com.ahmad.springboot.error.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,7 +34,13 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return new User("a", passwordEncoder().encode("a"), AuthorityUtils.NO_AUTHORITIES);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return new User("a", passwordEncoder().encode("a"), AuthorityUtils.NO_AUTHORITIES);
+
+        AppUser appUser = userRepository.findByEmail(username);
+        if (appUser == null)
+            throw new NotFoundException("User not found");
+
+        return appUser;
     }
 }
