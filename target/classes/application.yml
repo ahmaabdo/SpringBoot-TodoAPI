@@ -1,7 +1,0 @@
-server:
-  port: 8081
-
-spring:
-  data:
-    mongodb:
-      uri: mongodb+srv://ahmad:ahmad@clustertest01-9etyr.mongodb.net/Todos?retryWrites=true&w=majority
