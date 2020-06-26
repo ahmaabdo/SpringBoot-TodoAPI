@@ -1,0 +1,14 @@
+/target/classes/META-INF/springboot.todoapi.kotlin_module
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+*~
+.DS_Store
+*.class
+*.jdb
+private.xml
+BackEnd.cdi_javac
+BackEnd.jpr
+*.war
