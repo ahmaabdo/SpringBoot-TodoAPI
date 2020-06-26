@@ -12,8 +12,10 @@ public class Todo {
     @Id
     private String id;
 
+    private String userId;
+
     @NotNull(message = "Title is required")
-    @Size(min =3, message = "Title must be at least 3 characters long")
+    @Size(min = 3, message = "Title must be at least 3 characters long")
     private String title;
 
     @NotNull(message = "Description is required")
@@ -62,5 +64,13 @@ public class Todo {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

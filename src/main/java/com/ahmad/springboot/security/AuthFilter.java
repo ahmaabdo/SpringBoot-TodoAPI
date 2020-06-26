@@ -33,9 +33,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
         if (header != null && securityContext.getAuthentication() == null) {
             String token = header.substring("Bearer ".length());
-            System.out.println("tokeeeeen: "+token);
             String username = tokenUtil.getUsernameFromToken(token);
-            System.out.println("usernameeee " +username);
 
             if (username != null) {
                 UserDetails userDetails = userService.loadUserByUsername(username);

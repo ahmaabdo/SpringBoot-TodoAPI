@@ -4,6 +4,8 @@ package com.ahmad.springboot.todos;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TodoRepository extends MongoRepository<Todo,String > {
 
@@ -13,4 +15,9 @@ public interface TodoRepository extends MongoRepository<Todo,String > {
 
     Todo findByTitleAndIdNot(String title, String id);
 
+    List<Todo> findByUserId(String userId);
+
+    Todo findByIdAndUserId(String userId, String id);
+
+    boolean existsByUserIdAndId(String userId, String id);
 }
